@@ -1,23 +1,28 @@
 package vitals;
 
+import vitals.language.Languages;
+import vitals.thresholds.ChargeRateManipulator;
+import vitals.thresholds.SOCCManipulator;
+import vitals.thresholds.TemperatureManipulator;
+import vitals.util.BatteryInfo;
+
 public class Main {
-    static boolean batteryIsOk(float temperature, float soc, float chargeRate) {
-        if(temperature < 0 || temperature > 45) {
-            System.out.println("Temperature is out of range!");
-            return false;
-        } else if(soc < 20 || soc > 80) {
-            System.out.println("State of Charge is out of range!");
-            return false;
-        } else if(chargeRate > 0.8) {
-            System.out.println("Charge Rate is out of range!");
-            return false;
+    static boolean batteryIsOk(float value, BatteryInfo batteryInfo, Languages languages) {
+        if(batteryInfo==BatteryInfo.TEMPERATURE) {
+            return new TemperatureManipulator().defineBatteryStatus(value,languages);
+        } else if(batteryInfo==BatteryInfo.CHARGE_STATE) {
+            return new SOCCManipulator().defineBatteryStatus(value,languages);
+        } else {
+            return new ChargeRateManipulator().defineBatteryStatus(value,languages);
         }
-        return true;
     }
 
     public static void main(String[] args) {
-        assert(batteryIsOk(25, 70, 0.7f) == true);
-        assert(batteryIsOk(50, 85, 0.0f) == false);
-        System.out.println("Some more tests needed");
+        assert(batteryIsOk(25, BatteryInfo.TEMPERATURE,Languages.ENGLISH)==true);
+        assert(batteryIsOk(50, BatteryInfo.TEMPERATURE, Languages.GERMAN) == false);
+        assert(batteryIsOk(70, BatteryInfo.CHARGE_STATE,Languages.GERMAN) == true);
+        assert(batteryIsOk(85, BatteryInfo.CHARGE_STATE, Languages.OTHERS) == false);
+        assert(batteryIsOk(0.9f, BatteryInfo.CHARGE_RATE, Languages.ENGLISH) == false);
+        System.out.println("Tested");
     }
 }
