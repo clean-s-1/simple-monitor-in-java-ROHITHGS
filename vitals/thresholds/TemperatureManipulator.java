@@ -14,11 +14,11 @@ public class TemperatureManipulator implements BMSCalculation{
         bmsValues.setMax(45);
         bmsValues.setTolerance(5);
         Map<ThreshHoldLevel,String> toleranceText = new HashMap<>();
-        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"LOW_BREACH_CR");
-        toleranceText.put(ThreshHoldLevel.HIGH_BREACH,"HIGH_BREACH_CR");
-        toleranceText.put(ThreshHoldLevel.LOW_WARNING,"LOW_WARNING_CR");
-        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"HIGH_BREACH_CR");
-        toleranceText.put(ThreshHoldLevel.NORMAL,"NORMAL_CR");
+        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"LOW_BREACH_TEMP");
+        toleranceText.put(ThreshHoldLevel.HIGH_BREACH,"HIGH_BREACH_TEMP");
+        toleranceText.put(ThreshHoldLevel.LOW_WARNING,"LOW_WARNING_TEMP");
+        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"HIGH_BREACH_TEMP");
+        toleranceText.put(ThreshHoldLevel.NORMAL,"NORMAL_TEMP");
         bmsValues.setToleranceText(toleranceText);
     }
     @Override

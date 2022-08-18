@@ -1,7 +1,6 @@
 package vitals.util;
 
 import vitals.thresholds.BMSCalculation;
-import vitals.thresholds.BMSValues;
 import vitals.thresholds.ThreshHoldLevel;
 
 public class ThresholdDefiner {

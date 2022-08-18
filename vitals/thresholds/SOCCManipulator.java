@@ -14,11 +14,11 @@ public class SOCCManipulator implements BMSCalculation{
         bmsValues.setMax(80);
         bmsValues.setTolerance(5);
         Map<ThreshHoldLevel,String> toleranceText = new HashMap<>();
-        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"LOW_BREACH_CR");
-        toleranceText.put(ThreshHoldLevel.HIGH_BREACH,"HIGH_BREACH_CR");
-        toleranceText.put(ThreshHoldLevel.LOW_WARNING,"LOW_WARNING_CR");
-        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"HIGH_BREACH_CR");
-        toleranceText.put(ThreshHoldLevel.NORMAL,"NORMAL_CR");
+        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"LOW_BREACH_SOC");
+        toleranceText.put(ThreshHoldLevel.HIGH_BREACH,"HIGH_BREACH_SOC");
+        toleranceText.put(ThreshHoldLevel.LOW_WARNING,"LOW_WARNING_SOC");
+        toleranceText.put(ThreshHoldLevel.LOW_BREACH,"HIGH_BREACH_SOC");
+        toleranceText.put(ThreshHoldLevel.NORMAL,"NORMAL_SOC");
         bmsValues.setToleranceText(toleranceText);
     }
     @Override
