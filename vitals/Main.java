@@ -1,16 +1,28 @@
 package vitals;
 
+import vitals.language.Languages;
+import vitals.thresholds.ChargeRateManipulator;
+import vitals.thresholds.SOCCManipulator;
+import vitals.thresholds.TemperatureManipulator;
+import vitals.util.BatteryInfo;
+
 public class Main {
-    static boolean batteryIsOk(float temperature, float soc, float chargeRate, BatteryHealth batteryHealth) {
-        return batteryHealth.healthStatus(temperature,soc,chargeRate);
+    static boolean batteryIsOk(float value, BatteryInfo batteryInfo, Languages languages) {
+        if(batteryInfo==BatteryInfo.TEMPERATURE) {
+            return new TemperatureManipulator().defineBatteryStatus(value,languages);
+        } else  if(batteryInfo==BatteryInfo.CHARGE_STATE) {
+            return new SOCCManipulator().defineBatteryStatus(value,languages);
+        } else {
+            return new ChargeRateManipulator().defineBatteryStatus(value,languages);
+        }
     }
 
     public static void main(String[] args) {
-        assert(batteryIsOk(25, 70, 0.7f,BatteryHealthManipulator.valueOf("TEMPERATURE")) == true);
-        assert(batteryIsOk(55, 89, 0.0f,BatteryHealthManipulator.valueOf("TEMPERATURE")) == false);
-        assert(batteryIsOk(25, 69, 0.7f,BatteryHealthManipulator.valueOf("CHARGE_STATE")) == true);
-        assert(batteryIsOk(25, 85, 0.0f,BatteryHealthManipulator.valueOf("CHARGE_STATE")) == false);
-        assert(batteryIsOk(25, 70, 0.9f,BatteryHealthManipulator.valueOf("CHARGE_RATE")) == false);
-        System.out.println("Some more tests needed");
+        assert(batteryIsOk(25, BatteryInfo.TEMPERATURE,Languages.ENGLISH)==true);
+        assert(batteryIsOk(55, BatteryInfo.TEMPERATURE, Languages.GERMAN) == false);
+        assert(batteryIsOk(25, BatteryInfo.CHARGE_STATE,Languages.GERMAN) == true);
+        assert(batteryIsOk(25, BatteryInfo.CHARGE_STATE, Languages.OTHERS) == false);
+        assert(batteryIsOk(25, BatteryInfo.CHARGE_RATE, Languages.ENGLISH) == false);
+        System.out.println("Tested");
     }
 }
